@@ -1,5 +1,4 @@
 # 載入必要模組
-import os
 #import haohaninfo
 #from order_Lo8 import Record
 import numpy as np
@@ -7,84 +6,42 @@ import numpy as np
 #import sys
 import indicator_f_Lo2_short,datetime, indicator_forKBar_short
 import pandas as pd
+
 import streamlit as st 
 import streamlit.components.v1 as stc 
-from order_streamlit import Record
-import matplotlib.pyplot as plt
-import matplotlib
 
-
-####### (1) 開始設定 #######
-###### 設定網頁標題介面 
 html_temp = """
-		<div style="background-color:#3872fb;padding:10px;border-radius:10px">   
-		<h1 style="color:white;text-align:center;">金融看板與程式交易平台 </h1>
-		<h2 style="color:white;text-align:center;">Financial Dashboard and Program Trading </h2>
+		<div style="background-color:#3872fb;padding:10px;border-radius:10px">
+		<h1 style="color:white;text-align:center;">金融資料視覺化呈現 (金融看板) </h1>
+		<h2 style="color:white;text-align:center;">Financial Dashboard </h2>
 		</div>
 		"""
 stc.html(html_temp)
 
-
-###### 讀取資料
-@st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
-def load_data(path):
-    df = pd.read_pickle(path)
-    return df
-# ##### 讀取 excel 檔
-# df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
-
-
-###### 選擇金融商品
-st.subheader("選擇金融商品: ")
-# choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
-choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11', '英業達2020.1.2 至 2024.4.12', '堤維西2020.1.2 至 2024.4.12']
-choice = st.selectbox('選擇金融商品', choices, index=0)
-##### 读取Pickle文件
-if choice == '台積電: 2022.1.1 至 2024.4.9':
-    df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
-    # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
-    # df_original = load_data('kbars_2330_2022-01-01-2022-11-18.pkl')  
-    # df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
-    #df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
-    # df_original = df_original.drop('Unnamed: 0',axis=1)
-# if choice == '大台指2024.12到期: 2024.1 至 2024.4.9':
-#     df_original = load_data('kbars_TXF202412_2024-01-01-2024-04-09.pkl')  
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
-if choice == '英業達2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_2356_2020-01-01-2024-04-12.pkl')
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_1522_2020-01-01-2024-04-12.pkl')
+#df = pd.read_excel("kbars_台積電_1100701_1100708_2.xlsx")
+#df = pd.read_excel("kbars_2330_2022-07-01-2022-07-31.xlsx")
+#df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
+## 读取Pickle文件
+df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
+#df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
+df_original = df_original.drop('Unnamed: 0',axis=1)
+#df.columns  ## Index(['time', 'open', 'low', 'high', 'close', 'volume', 'amount'], dtype='object')
+#df['time']
+#type(df['time'])  ## pandas.core.series.Series
+#df['time'][11]
+#df.head()
+#df.tail()
+#type(df['time'][0])
 
 
-
-
-###### 選擇資料區間
-st.subheader("選擇資料時間區間")
-if choice == '台積電: 2022.1.1 至 2024.4.9':
-    start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-09', '2022-01-01')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-09), 區間:2022-01-01 至 2024-04-09', '2024-04-09')
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '英業達2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-
-
-
+st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
+start_date = st.text_input('選擇開始日期 (日期格式: 2022-01-03)', '2022-01-03')
+end_date = st.text_input('選擇結束日期 (日期格式: 2022-11-18)', '2022-11-18')
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 # 使用条件筛选选择时间区间的数据
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
+
 
 
 ####### (2) 轉化為字典 #######
