@@ -44,7 +44,7 @@ def load_data(path):
 ###### 選擇金融商品
 st.subheader("選擇金融商品: ")
 # choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
-choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11', '英業達2020.1.2 至 2024.4.12', '堤維西2020.1.2 至 2024.4.12']
+choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11']
 choice = st.selectbox('選擇金融商品', choices, index=0)
 ##### 读取Pickle文件
 if choice == '台積電: 2022.1.1 至 2024.4.9':
@@ -60,10 +60,6 @@ if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
 if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
-if choice == '英業達2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_2356_2020-01-01-2024-04-12.pkl')
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_1522_2020-01-01-2024-04-12.pkl')
 
 
 
@@ -79,12 +75,6 @@ if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
 if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '英業達2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
 
 
 
@@ -207,9 +197,9 @@ def Calculate_MA(df, period=10):
 #####  設定長短移動平均線的 K棒 長度:
 with st.expander("設定長短移動平均線的 K棒 長度:"):
     # st.subheader("設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)")
-    LongMAPeriod=st.slider('設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)', 0, 100, 10, key='visualization_MA_long')
+    LongMAPeriod=st.slider('設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)', 0, 100, 0, key='visualization_MA_long')
     # st.subheader("設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)")
-    ShortMAPeriod=st.slider('設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)', 0, 100, 2, key='visualization_MA_short')
+    ShortMAPeriod=st.slider('設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)', 0, 100, 0, key='visualization_MA_short')
 
 ##### 計算長短移動平均線
 KBar_df['MA_long'] = Calculate_MA(KBar_df, period=LongMAPeriod)
@@ -236,9 +226,9 @@ def Calculate_RSI(df, period=14):
 #### 設定長短 RSI 的 K棒 長度:
 with st.expander("設定長短 RSI 的 K棒 長度:"):
     # st.subheader("設定計算長RSI的 K棒週期數目(整數, 例如 10)")
-    LongRSIPeriod=st.slider('設定計算長RSI的 K棒週期數目(整數, 例如 10)', 0, 1000, 10, key='visualization_RSI_long')
+    LongRSIPeriod=st.slider('設定計算長RSI的 K棒週期數目(整數, 例如 10)', 0, 1000, 0, key='visualization_RSI_long')
     # st.subheader("設定計算短RSI的 K棒週期數目(整數, 例如 2)")
-    ShortRSIPeriod=st.slider('設定計算短RSI的 K棒週期數目(整數, 例如 2)', 0, 1000, 2, key='visualization_RSI_short')
+    ShortRSIPeriod=st.slider('設定計算短RSI的 K棒週期數目(整數, 例如 2)', 0, 1000, 0, key='visualization_RSI_short')
 
 #### 計算 RSI指標長短線, 以及定義中線
 KBar_df['RSI_long'] = Calculate_RSI(KBar_df, LongRSIPeriod)
@@ -278,9 +268,7 @@ def Calculate_Bollinger_Bands(df, period=20, num_std_dev=2):
 
 #####  設定布林通道(Bollinger Band)相關參數:
 with st.expander("設定布林通道(Bollinger Band)相關參數:"):
-    # st.subheader("設定計算布林通道(Bollinger Band)上中下三通道之K棒週期數目(整數, 例如 20)")
     period = st.slider('設定計算布林通道(Bollinger Band)上中下三通道之K棒週期數目(整數, 例如 20)', 0, 100, 20, key='BB_period')
-    # st.subheader("設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)")
     num_std_dev = st.slider('設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)', 0, 100, 2, key='BB_heigh')
 
 ##### 計算布林通道上中下通道:
