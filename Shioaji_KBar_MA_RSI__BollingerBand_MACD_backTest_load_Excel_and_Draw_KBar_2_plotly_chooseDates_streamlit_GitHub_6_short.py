@@ -38,7 +38,7 @@ def load_data(path):
     df = pd.read_pickle(path)
     return df
 # ##### 讀取 excel 檔
-df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
+# df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
 
 
 ###### 選擇金融商品
