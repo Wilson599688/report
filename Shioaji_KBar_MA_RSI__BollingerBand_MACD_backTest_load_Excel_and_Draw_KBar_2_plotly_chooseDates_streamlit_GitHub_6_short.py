@@ -25,7 +25,7 @@ import matplotlib
 ###### 設定網頁標題介面 
 html_temp = """
 		<div style="background-color:#ffea33;padding:10px;border-radius:10px">   
-		<h1 style="color:white;text-align:center;">金融大數據分析作業 </h1>
+		<h1 style="color:black;text-align:center;">金融大數據分析作業 </h1>
 		<h2 style="color:white;text-align:center;">資科三B 411007205 連偉臣 </h2>
 		</div>
 		"""
