@@ -326,8 +326,8 @@ else:
 
 
 # ####### (5) 將 Dataframe 欄位名稱轉換(第一個字母大寫)  ####### 
-KBar_df_original = KBar_df
-KBar_df.columns = [ i[0].upper()+i[1:] for i in KBar_df.columns ]
+# KBar_df_original = KBar_df
+# KBar_df.columns = [ i[0].upper()+i[1:] for i in KBar_df.columns ]
 
 
 ####### (6) 畫圖 #######
