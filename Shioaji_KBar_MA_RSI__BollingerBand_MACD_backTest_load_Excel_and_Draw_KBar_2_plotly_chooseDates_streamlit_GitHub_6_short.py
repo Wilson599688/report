@@ -197,9 +197,9 @@ def Calculate_MA(df, period=10):
 #####  設定長短移動平均線的 K棒 長度:
 with st.expander("設定長短移動平均線的 K棒 長度:"):
     # st.subheader("設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)")
-    LongMAPeriod=st.slider('設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)', 0, 100, 0, key='visualization_MA_long')
+    LongMAPeriod=st.slider('設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)', 0, 100, 10, key='visualization_MA_long')
     # st.subheader("設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)")
-    ShortMAPeriod=st.slider('設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)', 0, 100, 0, key='visualization_MA_short')
+    ShortMAPeriod=st.slider('設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)', 0, 100, 2, key='visualization_MA_short')
 
 ##### 計算長短移動平均線
 KBar_df['MA_long'] = Calculate_MA(KBar_df, period=LongMAPeriod)
@@ -226,9 +226,9 @@ def Calculate_RSI(df, period=14):
 #### 設定長短 RSI 的 K棒 長度:
 with st.expander("設定長短 RSI 的 K棒 長度:"):
     # st.subheader("設定計算長RSI的 K棒週期數目(整數, 例如 10)")
-    LongRSIPeriod=st.slider('設定計算長RSI的 K棒週期數目(整數, 例如 10)', 0, 1000, 0, key='visualization_RSI_long')
+    LongRSIPeriod=st.slider('設定計算長RSI的 K棒週期數目(整數, 例如 10)', 0, 1000, 10, key='visualization_RSI_long')
     # st.subheader("設定計算短RSI的 K棒週期數目(整數, 例如 2)")
-    ShortRSIPeriod=st.slider('設定計算短RSI的 K棒週期數目(整數, 例如 2)', 0, 1000, 0, key='visualization_RSI_short')
+    ShortRSIPeriod=st.slider('設定計算短RSI的 K棒週期數目(整數, 例如 2)', 0, 1000, 2, key='visualization_RSI_short')
 
 #### 計算 RSI指標長短線, 以及定義中線
 KBar_df['RSI_long'] = Calculate_RSI(KBar_df, LongRSIPeriod)
@@ -268,8 +268,8 @@ def Calculate_Bollinger_Bands(df, period=20, num_std_dev=2):
 
 #####  設定布林通道(Bollinger Band)相關參數:
 with st.expander("設定布林通道(Bollinger Band)相關參數:"):
-    period = st.slider('設定計算布林通道(Bollinger Band)上中下三通道之K棒週期數目(整數, 例如 20)', 0, 100, 0, key='BB_period')
-    num_std_dev = st.slider('設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)', 0, 100, 0, key='BB_heigh')
+    period = st.slider('設定計算布林通道(Bollinger Band)上中下三通道之K棒週期數目(整數, 例如 20)', 0, 100, 20, key='BB_period')
+    num_std_dev = st.slider('設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)', 0, 100, 2, key='BB_heigh')
 
 ##### 計算布林通道上中下通道:
 KBar_df = Calculate_Bollinger_Bands(KBar_df, period, num_std_dev)
@@ -292,11 +292,11 @@ def Calculate_MACD(df, fast_period=12, slow_period=26, signal_period=9):
 #####  設定MACD三種週期的K棒長度:
 with st.expander("設定MACD三種週期的K棒長度:"):
     # st.subheader("設定計算 MACD的快速線週期(例如 12根日K)")
-    fast_period = st.slider('設定計算 MACD快速線的K棒週期數目(例如 12根日K)', 0, 100, 0, key='visualization_MACD_quick')
+    fast_period = st.slider('設定計算 MACD快速線的K棒週期數目(例如 12根日K)', 0, 100, 12, key='visualization_MACD_quick')
     # st.subheader("設定計算 MACD的慢速線週期(例如 26根日K)")
-    slow_period = st.slider('設定計算 MACD慢速線的K棒週期數目(例如 26根日K)', 0, 100, 0, key='visualization_MACD_slow')
+    slow_period = st.slider('設定計算 MACD慢速線的K棒週期數目(例如 26根日K)', 0, 100, 26, key='visualization_MACD_slow')
     # st.subheader("設定計算 MACD的訊號線週期(例如 9根日K)")
-    signal_period = st.slider('設定計算 MACD訊號線的K棒週期數目(例如 9根日K)', 0, 100, 0, key='visualization_MACD_signal')
+    signal_period = st.slider('設定計算 MACD訊號線的K棒週期數目(例如 9根日K)', 0, 100, 9, key='visualization_MACD_signal')
 
 ##### 計算MACD:
 KBar_df = Calculate_MACD(KBar_df, fast_period, slow_period, signal_period)
