@@ -61,11 +61,11 @@ if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
 if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
 if choice == '中興電:2022.1至2024.1':
-    df_original = load_data('stock_data1513.pkl')
+    df_original = load_data('kbars_1513_2022-01-02-2024-06-17.pkl')
 if choice == '鴻海:2022.1至2024.1':
-    df_original = load_data('stock_data2317.pkl')
+    df_original = load_data('kbars_2317_2022-01-02-2024-06-17.pkl')
 if choice == '緯穎:2022.1至2024.1':
-    df_original = load_data('stock_data6669.pkl')
+    df_original = load_data('kbars_6669_2022-01-02-2024-06-17.pkl')
 
 
 
