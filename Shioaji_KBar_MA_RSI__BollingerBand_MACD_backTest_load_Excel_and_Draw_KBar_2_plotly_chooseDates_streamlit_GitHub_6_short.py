@@ -250,22 +250,6 @@ KBar_df['RSI_Middle']=np.array([50]*len(KBar_dic['time']))
 last_nan_index_RSI = KBar_df['RSI_long'][::-1].index[KBar_df['RSI_long'][::-1].apply(pd.isna)][0]
 
 
-##### 逆勢策略
-#### 建立部位管理物件
-OrderRecord=Record() 
-#### 計算 RSI指標, 天花板與地板
-RSIPeriod=5
-Ceil=80
-Floor=20
-MoveStopLoss=30
-KBar_dic['RSI']=RSI(KBar_dic,timeperiod=RSIPeriod)
-KBar_dic['Ceil']=np.array([Ceil]*len(KBar_dic['time']))
-KBar_dic['Floor']=np.array([Floor]*len(KBar_dic['time']))
-
-#### 將K線 Dictionary 轉換成 Dataframe
-KBar_RSI_df=pd.DataFrame(KBar_dic)
-
-
 ######  (iii) Bollinger Band (布林通道) 策略 
 ##### 假设df是包含价格数据的Pandas DataFrame，'close'列是每日收盘价格
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
