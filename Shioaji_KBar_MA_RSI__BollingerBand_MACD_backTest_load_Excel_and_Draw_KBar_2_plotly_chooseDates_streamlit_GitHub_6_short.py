@@ -173,11 +173,9 @@ st.subheader("設定技術指標視覺化圖形之相關參數:")
 
 ###### 設定 K 棒的時間長度(分鐘)
 with st.expander("設定K棒相關參數:"):
-    choices_unit = ['以分鐘為單位','以日為單位','以週為單位','以月為單位']
+    choices_unit = ['以日為單位','以週為單位','以月為單位']
     choice_unit = st.selectbox('選擇計算K棒時間長度之單位', choices_unit, index=1)
-    if choice_unit == '以分鐘為單位':
-        cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:分鐘, 一日=1440分鐘)', value=1, key="KBar_duration_分")
-        cycle_duration = float(cycle_duration)
+    
     if choice_unit == '以日為單位':
         cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:日)', value=1, key="KBar_duration_日")
         cycle_duration = float(cycle_duration)
@@ -252,20 +250,20 @@ KBar_df['RSI_Middle']=np.array([50]*len(KBar_dic['time']))
 last_nan_index_RSI = KBar_df['RSI_long'][::-1].index[KBar_df['RSI_long'][::-1].apply(pd.isna)][0]
 
 
-# ##### 逆勢策略
-# #### 建立部位管理物件
-# OrderRecord=Record() 
-# #### 計算 RSI指標, 天花板與地板
-# RSIPeriod=5
-# Ceil=80
-# Floor=20
-# MoveStopLoss=30
-# KBar_dic['RSI']=RSI(KBar_dic,timeperiod=RSIPeriod)
-# KBar_dic['Ceil']=np.array([Ceil]*len(KBar_dic['time']))
-# KBar_dic['Floor']=np.array([Floor]*len(KBar_dic['time']))
+##### 逆勢策略
+#### 建立部位管理物件
+OrderRecord=Record() 
+#### 計算 RSI指標, 天花板與地板
+RSIPeriod=5
+Ceil=80
+Floor=20
+MoveStopLoss=30
+KBar_dic['RSI']=RSI(KBar_dic,timeperiod=RSIPeriod)
+KBar_dic['Ceil']=np.array([Ceil]*len(KBar_dic['time']))
+KBar_dic['Floor']=np.array([Floor]*len(KBar_dic['time']))
 
-# #### 將K線 Dictionary 轉換成 Dataframe
-# KBar_RSI_df=pd.DataFrame(KBar_dic)
+#### 將K線 Dictionary 轉換成 Dataframe
+KBar_RSI_df=pd.DataFrame(KBar_dic)
 
 
 ######  (iii) Bollinger Band (布林通道) 策略 
