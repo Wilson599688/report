@@ -44,7 +44,7 @@ def load_data(path):
 ###### 選擇金融商品
 st.subheader("選擇金融商品: ")
 # choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
-choices = ['中興電:2022.1至2024.4' ,'台積電: 2022.1.1 至 2024.4.9', '智原:2022.1至2024.4','緯穎:2022.1至2024.4']
+choices = ['士電:2022.1至2024.4' ,'台積電: 2022.1.1 至 2024.4.9', '智原:2022.1至2024.4','緯穎:2022.1至2024.4']
 choice = st.selectbox('選擇金融商品', choices, index=0)
 ##### 读取Pickle文件
 if choice == '台積電: 2022.1.1 至 2024.4.9':
@@ -60,8 +60,8 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
 #    df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
 #if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
 #    df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
-if choice == '中興電:2022.1至2024.4':
-    df_original = load_data('kbars_1513_2022-01-01-2024-04-30.pkl')
+if choice == '士電:2022.1至2024.4':
+    df_original = load_data('kbars_1503_2022-01-01-2024-04-30.pkl')
 if choice == '智原:2022.1至2024.4':
     df_original = load_data('kbars_3035_2022-01-01-2024-04-30.pkl')
 if choice == '緯穎:2022.1至2024.4':
@@ -80,7 +80,7 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
 #if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
 #    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
 #    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '中興電:2022.1至2024.4':
+if choice == '士電:2022.1至2024.4':
     start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-30', '2022-01-01')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-30), 區間:2022-01-01 至 2024-04-30', '2024-04-30')
 if choice == '智原:2022.1至2024.4':
@@ -643,7 +643,7 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '中興電:2022.1至2024.4':
+if choice == '士電:2022.1至2024.4':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*1000          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit()*1000         ## 取得交易 "平均" 盈虧(每次)
@@ -715,7 +715,7 @@ if choice == '智原:2022.1至2024.4':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
 if choice == '緯穎:2022.1至2024.4':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
-if choice == '中興電:2022.1至2024.4':
+if choice == '士電:2022.1至2024.4':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
     
 
