@@ -37,29 +37,16 @@ stc.html(html_temp)
 def load_data(path):
     df = pd.read_pickle(path)
     return df
-# ##### 讀取 excel 檔
-# df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
+
 
 
 ###### 選擇金融商品
 st.subheader("選擇金融商品: ")
-# choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
 choices = ['士電:2022.1至2024.4' ,'台積電: 2022.1.1 至 2024.4.9', '智原:2022.1至2024.4','緯穎:2022.1至2024.4']
 choice = st.selectbox('選擇金融商品', choices, index=0)
 ##### 读取Pickle文件
 if choice == '台積電: 2022.1.1 至 2024.4.9':
     df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
-    # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
-    # df_original = load_data('kbars_2330_2022-01-01-2022-11-18.pkl')  
-    # df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
-    #df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
-    # df_original = df_original.drop('Unnamed: 0',axis=1)
-# if choice == '大台指2024.12到期: 2024.1 至 2024.4.9':
-#     df_original = load_data('kbars_TXF202412_2024-01-01-2024-04-09.pkl')  
-#if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-#    df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
-#if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-#    df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
 if choice == '士電:2022.1至2024.4':
     df_original = load_data('kbars_1503_2022-01-01-2024-04-30.pkl')
 if choice == '智原:2022.1至2024.4':
@@ -74,12 +61,6 @@ st.subheader("選擇資料時間區間")
 if choice == '台積電: 2022.1.1 至 2024.4.9':
     start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-09', '2022-01-01')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-09), 區間:2022-01-01 至 2024-04-09', '2024-04-09')
-#if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-#    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-#    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-#if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-#    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-#    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
 if choice == '士電:2022.1至2024.4':
     start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-30', '2022-01-01')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-30), 區間:2022-01-01 至 2024-04-30', '2024-04-30')
@@ -304,13 +285,6 @@ if len(nan_indexes_MACD) > 0:
     last_nan_index_MACD = nan_indexes_MACD[0]
 else:
     last_nan_index_MACD = 0
-
-
-
-
-# ####### (5) 將 Dataframe 欄位名稱轉換(第一個字母大寫)  ####### 
-# KBar_df_original = KBar_df
-# KBar_df.columns = [ i[0].upper()+i[1:] for i in KBar_df.columns ]
 
 
 ####### (6) 畫圖 #######
